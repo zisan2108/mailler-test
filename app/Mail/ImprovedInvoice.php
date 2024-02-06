@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Attachment;
 
 class ImprovedInvoice extends Mailable
 {
@@ -53,7 +54,9 @@ class ImprovedInvoice extends Mailable
     public function attachments(): array
     {
         return [
-            public_path('files/data.pdf')
+            // public_path('files/data.pdf')
+            // Attachment::fromPath('files/data.pdf')->as('invoice.pdf')->withMime('application/path')
+            Attachment::fromStorage('/files/inv.pdf')->as('invoicexyz.pdf')->withMime('application/path')
         ];
     }
 }
