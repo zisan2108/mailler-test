@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\Invoice;
+use App\Mail\ImprovedInvoice;
 
 class MailController extends Controller
 {
@@ -72,8 +73,15 @@ class MailController extends Controller
     }
 
     function sendMailWithMailable(){
-        Mail::to('Zisan979@gmai.com', 'NZ')->send(new Invoice());
-        return 'Email sent';
+        // Mail::to('Zisan979@gmai.com', 'NZ')->send(new Invoice());
+
+        $data=[
+            'orderid'=>'15',
+            'ordertotal'=>'5000',
+        ];
+
+        Mail::to('zisan979@gmail.com','NZ')->send(new ImprovedInvoice($data));
+               return 'Email sent';
 
     }
 }
